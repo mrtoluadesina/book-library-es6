@@ -19,6 +19,13 @@ User.prototype = {
   delete: function() {
     this.isActive = false;
     return 'User Deleted';
+  },
+  search: function(name) {
+    for (var index = 0; index < db.users.length; index++) {
+      if (db.users[index].name === name) {
+        return db.users[index];
+      }
+    }
   }
 }
 
