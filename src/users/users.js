@@ -10,6 +10,9 @@ User.prototype = {
     this.name = name;
     db.users.push(this);
     return 'User Created';
+  },
+  readUser: function() {
+    return this;
   }
 }
 
