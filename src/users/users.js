@@ -10,6 +10,10 @@ User.prototype = {
   constructor: User,
   readUser: function() {
     return this;
+  },
+  update: function(name) {
+    this.name = name;
+    return this;
   }
 }
 
