@@ -26,5 +26,6 @@ describe('User Constructor Tests', function() {
 
   it('checks if the user gets deleted', function() {
     var cersei = new User('lannister');
+    expect(cersei.delete()).toBe('User Deleted');
   });
 });
