@@ -17,4 +17,10 @@ describe('User Constructor Tests', function() {
     var snow = new User();
     expect(snow.createUser('jon')).toMatch('User Created');
   });
+
+  it('checks if a user can read his details', function() {
+    var jon = new User();
+    jon.createUser('snow');
+    expect(jon.readUser()).toBe(expect.objectContaining({'name': 'snow'}));
+  });
 });
