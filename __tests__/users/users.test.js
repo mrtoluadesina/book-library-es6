@@ -21,6 +21,6 @@ describe('User Constructor Tests', function() {
   it('checks if a user can read his details', function() {
     var jon = new User();
     jon.createUser('snow');
-    expect(jon.readUser()).toBe(expect.objectContaining({'name': 'snow'}));
+    expect(jon.readUser()).toEqual(expect.objectContaining({'name': 'snow'}));
   });
 });
