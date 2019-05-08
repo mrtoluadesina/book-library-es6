@@ -20,6 +20,7 @@ describe('User Constructor Tests', function() {
   });
 
   it('checks if the users details gets updated', function() {
-    var arya = new User();
+    var arya = new User('stark');
+    expect(arya.update('tyron')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^tyron$/)}));
   });
 });
