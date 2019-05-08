@@ -1,0 +1,35 @@
+{
+  "name": "book-library",
+  "version": "1.0.0",
+  "description": "A book library system where students and teachers borrow books",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrtoluadesina/book-library.git"
+  },
+  "keywords": [
+    "book",
+    "library",
+    "javascript",
+    "prototype-based",
+    "object",
+    "oriented",
+    "programming",
+    "oop",
+    "pop",
+    "regex",
+    "permissions"
+  ],
+  "author": "Tolu Adesina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrtoluadesina/book-library/issues"
+  },
+  "homepage": "https://github.com/mrtoluadesina/book-library#readme",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
+}
