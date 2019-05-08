@@ -9,24 +9,24 @@ describe('User Constructor Tests', function() {
   });
 
   it('checks for an instance of the constructor', function() {
-    var jon = new User();
-    expect(jon instanceof User).toBeTruthy();
+    var snow = new User();
+    expect(snow instanceof User).toBeTruthy();
   });
 
   it('checks if a user is created', function() {
-    var snow = new User();
-    expect(snow.createUser('jon')).toMatch('User Created');
+    var jon = new User();
+    expect(jon.createUser('jon')).toMatch('User Created');
   });
 
   it('checks if a user can read his details', function() {
-    var jon = new User();
+    var arya = new User();
     var expected = {'name': expect.stringMatching(/^[a-z]+$/i)};
-    jon.createUser('snow');
-    expect(jon.readUser()).toEqual(expect.objectContaining({'name': 'snow'}));
-    expect(jon.readUser()).toEqual(expect.objectContaining(expected));
+    arya.createUser('stark');
+    expect(arya.readUser()).toEqual(expect.objectContaining({'name': 'stark'}));
+    expect(arya.readUser()).toEqual(expect.objectContaining(expected));
   });
 
   it('checks if the users details gets updated', function() {
-
+    
   })
 });
