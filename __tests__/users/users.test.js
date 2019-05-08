@@ -20,7 +20,13 @@ describe('User Constructor Tests', function() {
 
   it('checks if a user can read his details', function() {
     var jon = new User();
+    var expected = {'name': expect.stringMatching(/^[a-z]+$/i)};
     jon.createUser('snow');
     expect(jon.readUser()).toEqual(expect.objectContaining({'name': 'snow'}));
+    expect(jon.readUser()).toEqual(expect.objectContaining(expected));
   });
+
+  it('checks if the users details gets updated', function() {
+
+  })
 });
