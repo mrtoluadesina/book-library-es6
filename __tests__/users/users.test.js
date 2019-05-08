@@ -28,4 +28,9 @@ describe('User Constructor Tests', function() {
     var cersei = new User('lannister');
     expect(cersei.delete()).toBe('User Deleted');
   });
+
+  it('checks that a user is searched and found', function() {
+    var ser = new User('brienne');
+    expect(ser.search('brienne')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^brienne$/)}));
+  });
 });
