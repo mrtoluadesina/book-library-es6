@@ -23,4 +23,8 @@ describe('User Constructor Tests', function() {
     var arya = new User('stark');
     expect(arya.update('tyron')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^tyron$/)}));
   });
+
+  it('checks if the user gets deleted', function() {
+    var cersei = new User('lannister');
+  });
 });
