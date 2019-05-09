@@ -1,5 +1,6 @@
 var db = require('../../helper/db');
 var User = require('../../src/users/users');
+var Student = require('../../src/users/students');
 var Teacher = require('../../src/users/teachers');
 
 describe('User Constructor Tests', function() {
@@ -35,6 +36,13 @@ describe('User Constructor Tests', function() {
     expect(ser.search('brienne')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^brienne$/)}));
   });
 });
+
+describe('Student Constructor Tests', function() {
+  it('checks for an instance of the class', function() {
+    var littleFinger = new Student('little finger');
+    expect(littleFinger instanceof Student).toBeTruthy();
+  })
+})
 
 describe('Teacher Constructor Tests', function() {
   it('checks for an instance of class', function() {
