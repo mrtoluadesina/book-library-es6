@@ -1,5 +1,6 @@
 var db = require('../../db');
 var User = require('../../src/users/users');
+var Teacher = require('../../src/users/teachers');
 
 describe('User Constructor Tests', function() {
   it('checks the id autoincrement if it works properly', function() {
@@ -32,5 +33,12 @@ describe('User Constructor Tests', function() {
   it('checks that a user is searched and found', function() {
     var ser = new User('brienne');
     expect(ser.search('brienne')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^brienne$/)}));
+  });
+});
+
+describe('Teacher Constructor Tests', function() {
+  it('checks for an instance of class', function() {
+    var jamie = new Teacher('Jamie');
+    expect(jamie instanceof Teacher).toBeTruthy();
   });
 });
