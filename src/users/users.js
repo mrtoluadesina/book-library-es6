@@ -34,6 +34,9 @@ User.prototype = {
   },
   bookLookUp: function(name) {
     return Book.prototype.search(name);
+  },
+  getBookById: function(id) {
+    return Book.prototype.read(id);
   }
 }
 
