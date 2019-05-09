@@ -13,6 +13,11 @@ Book.prototype = {
   create: function() {
     return new Book;
   },
+  read: function(id) {
+    for (var index = 0; index < db.books.length; index++) {
+      if(db.books[index].id === id) { return db.books[index]; }
+    } return 'No Such Book';
+  },
   edit: function(name, quantity) {
     this.name = name;
     this.quantity = quantity;
