@@ -12,6 +12,11 @@ Book.prototype = {
   constructor: Book,
   create: function() {
     return new Book;
+  },
+  edit: function(name, quantity) {
+    this.name = name;
+    this.quantity = quantity;
+    return this;
   }
 }
 
