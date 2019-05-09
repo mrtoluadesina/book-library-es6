@@ -70,7 +70,15 @@ describe('Librarian Constructor Tests', function() {
     var admin = new Librarian('Tarly');
     var length = db.books.length;
     expect(admin.addBook('A Dance with Dragons', '3')).toBe('Book Created');
-    expect(db.books.length).toEqual(length + 1)
-    console.log(db.books)
+    expect(db.books.length).toEqual(length + 1);
+  });
+});
+
+describe('Library Method Tests', function() {
+  it('checks that a book searched by a user is found if Active', function() {
+    var edaard = new User('Edaard');
+    expect(edaard.bookLookUp('A Dance with Dragons')).toHaveProperty('isActive', true);
+    expect(edaard.bookLookUp('A Dance with Dragons')).toHaveProperty('quantity', '3');
+    expect(edaard.bookLookUp()).toMatch('Book not ');
   });
 });

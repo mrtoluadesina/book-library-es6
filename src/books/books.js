@@ -24,10 +24,8 @@ Book.prototype = {
   },
   search: function(name) {
     for (var index = 0; index < db.books.length; index++) {
-      if (db.books[index].name === name && db.books[index].isActive === true) {
-        return db.books[index];
-      }
-    }
+      if (db.books[index].name === name && db.books[index].isActive === true) return db.books[index];
+    } return 'Book not found!'
   }
 }
 

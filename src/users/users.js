@@ -1,4 +1,5 @@
 var db = require('../../helper/db');
+var Book = require('../books/books');
 
 function User(name) {
   this.name = name;
@@ -27,6 +28,9 @@ User.prototype = {
         return db.users[index];
       }
     }
+  },
+  bookLookUp: function(name) {
+    return Book.prototype.search(name);
   }
 }
 
