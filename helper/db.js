@@ -1,7 +1,8 @@
 var users = [];
 var books = [];
+var bookRequestLog = [];
 var library = [];
 
 module.exports = {
-  users, books, library
+  users, books, bookRequestLog, library
 };
