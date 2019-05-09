@@ -1,68 +1,58 @@
 var db = require('../../helper/db');
 var Book = require('../../src/books/books');
 var User = require('../../src/users/users');
-var Student = require('../../src/users/students');
-var Teacher = require('../../src/users/teachers');
 var Librarian = require('../../src/users/librarian');
 
 describe('User Constructor Tests', function() {
   it('checks the id autoincrement if it works properly', function() {
-    var jon = new User('snow');
+    var jon = new User('snow', 'jon@winterfell.com');
     expect(jon.id).toBe(1);
   });
 
   it('checks if a user is created from the constructor', function() {
-    var snow = new User('jon');
+    var snow = new User('jon', 'jon@winterfell.com');
     expect(snow instanceof User).toBeTruthy();
   });
 
   it('checks if a user can read his details', function() {
-    var arya = new User('stark');
+    var arya = new User('stark', 'stark@winterfell');
     var expected = {'name': expect.stringMatching(/^[a-z]+$/i)};
     expect(arya.readUser()).toEqual(expect.objectContaining({'name': 'stark'}));
     expect(arya.readUser()).toEqual(expect.objectContaining(expected));
   });
 
   it('checks if the users details gets updated', function() {
-    var arya = new User('stark');
+    var arya = new User('stark', 'stark@winterfell.com');
     expect(arya.update('tyron')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^tyron$/)}));
   });
 
   it('checks if the user gets deleted', function() {
-    var cersei = new User('lannister');
+    var cersei = new User('lannister', 'cersei@winterfell.com', 'senior student');
     expect(cersei.delete()).toBe('User Deleted');
   });
 
   it('checks that a user is searched and found', function() {
-    var ser = new User('brienne');
-    expect(ser.search('brienne')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^brienne$/)}));
+    var ser = new User('brienne', 'serb@winterfell.com', 'senior student');
+    expect(ser.search('brienne')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^brienne$/), 'userType': 'teacher'}));
   });
 });
 
-describe('Student Constructor Tests', function() {
-  it('checks for an instance of the class', function() {
-    var littleFinger = new Student('little finger');
-    expect(littleFinger instanceof Student).toBeTruthy();
-  })
+describe('Student Role Tests', function() {
+  
 })
 
-describe('Teacher Constructor Tests', function() {
-  it('checks for an instance of class', function() {
-    var jamie = new Teacher('Jamie');
-    expect(jamie instanceof Teacher).toBeTruthy();
-  });
-
+describe('Teacher Role Tests', function() {
   it('checks if a teacher can read his details', function() {
-    var sansa = new Teacher('stark');
+    var sansa = new User('sansa', 'sansa@winterfell.com', 'teacher');
     var expected = {'name': expect.stringMatching(/^[a-z]+$/i)};
-    expect(sansa.readUser()).toEqual(expect.objectContaining({'name': 'stark'}));
+    expect(sansa.readUser()).toEqual(expect.objectContaining({'name': 'sansa'}));
     expect(sansa.readUser()).toEqual(expect.objectContaining(expected));
   });
 });
 
 describe('Librarian Constructor Tests', function() {
   it('checks for an instance of the librarian class', function() {
-    var admin = new Librarian('Samwell');
+    var admin = new Librarian('Samwell', 'tarly@winterfell.com');
     expect(admin instanceof Librarian).toBeTruthy();
   });
   
