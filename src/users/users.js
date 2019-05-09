@@ -15,8 +15,10 @@ User.prototype = {
   readUser: function() {
     return this;
   },
-  update: function(name) {
+  update: function(name, email, userType) {
     this.name = name;
+    this.email = email;
+    this.userType = userType;
     return this;
   },
   delete: function() {
