@@ -16,5 +16,8 @@ Librarian.prototype.addBook = function(name, quantity) {
   db.books.push(book);
   return 'Book Created';
 }
+Librarian.prototype.getBookById = function(id) {
+  return Book.prototype.read(id);
+}
 
 module.exports = Librarian;
