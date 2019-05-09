@@ -41,4 +41,11 @@ describe('Teacher Constructor Tests', function() {
     var jamie = new Teacher('Jamie');
     expect(jamie instanceof Teacher).toBeTruthy();
   });
+
+  it('checks if a teacher can read his details', function() {
+    var sansa = new Teacher('stark');
+    var expected = {'name': expect.stringMatching(/^[a-z]+$/i)};
+    expect(sansa.readUser()).toEqual(expect.objectContaining({'name': 'stark'}));
+    expect(sansa.readUser()).toEqual(expect.objectContaining(expected));
+  });
 });
