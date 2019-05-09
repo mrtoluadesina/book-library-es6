@@ -1,9 +1,10 @@
 var db = require('../../helper/db');
 var Book = require('../books/books');
 
-function User(name) {
+function User(name, email, userType = 'junior student') {
   this.name = name;
-  this.role = 'student';
+  this.email = email;
+  this.userType = userType;
   this.isActive = true;
   this.id = db.users.length > 0 ? db.users[db.users.length - 1].id + 1 : 1;
   db.users.push(this);
