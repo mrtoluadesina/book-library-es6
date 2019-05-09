@@ -10,8 +10,12 @@ function Librarian(name) {
 
 inherit(Librarian, User)
 
-Librarian.prototype.addBook = function() {
-  
+Librarian.prototype.addBook = function(name, quantity) {
+  var book = Book.prototype.create();
+  book.name = name;
+  book.quantity = quantity;
+  db.books.push(book);
+  return 'Book Created';
 }
 
 module.exports = Librarian;
