@@ -31,6 +31,13 @@ Book.prototype = {
     for (var index = 0; index < db.books.length; index++) {
       if (db.books[index].name === name && db.books[index].isActive === true) return db.books[index];
     } return 'Book not found!'
+  },
+  bookRequest: function(id, duration) {
+    var bookName = Book.prototype.read(id).name;
+    db.bookRequestLog.push({
+      bookName, duration
+    });
+    return 'Request is being processed';
   }
 }
 

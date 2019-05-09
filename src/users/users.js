@@ -37,6 +37,9 @@ User.prototype = {
   },
   getBookById: function(id) {
     return Book.prototype.read(id);
+  },
+  requestBook: function(id, duration) {
+    return Book.prototype.bookRequest(id, duration);
   }
 }
 
