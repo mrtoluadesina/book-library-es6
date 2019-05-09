@@ -11,7 +11,7 @@ describe('Book Constructor Tests', function() {
     var got = new Book('A Game of Thrones', 20);
     expect(got).toEqual(expect.objectContaining({name: expect.stringMatching(/^[A-Za-z\s]+$/)}))
   });
-
+  
   it('checks that a book is updated', function() {
     var got = new Book('A Feast of Crows', 3);
     expect(got.edit('A Feast of Crows', 1)).toEqual(expect.objectContaining({quantity: 1}));
