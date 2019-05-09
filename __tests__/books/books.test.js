@@ -8,9 +8,7 @@ describe('Book Constructor Tests', function() {
   });
 
   it('checks that a book is created', function() {
-    var dbLength = db.books.length;
     var got = new Book('A Game of Thrones', '20');
-    expect(db.books.length).toBe(dbLength + 1);
     expect(got).toEqual(expect.objectContaining({name: expect.stringMatching(/^[A-Za-z\s]+$/)}))
   });
 });
