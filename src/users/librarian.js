@@ -3,9 +3,8 @@ var User = require('./users');
 var Book = require('../books/books');
 var inherit = require('../../helper/extend');
 
-function Librarian(name) {
-  User.call(this, name);
-  this.role = 'Admin';
+function Librarian(name, email, userType = 'Admin') {
+  User.call(this, name, email, userType);
 }
 
 inherit(Librarian, User)
