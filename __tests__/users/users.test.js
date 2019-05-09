@@ -78,4 +78,11 @@ describe('Library Method Tests', function() {
     expect(admin.getBookById()).toBe('No Such Book');
     expect(admin.getBookById(1)).toEqual(expect.objectContaining({name: 'A Dance with Dragons'}));
   })
+  
+  it('checks that a book is added to the book request table when requested', function() {
+    var edaard = new User('Edaard', 'edaard@winterfell.com', 'teacher');
+    var length = db.bookRequestLog.length
+    expect(edaard.requestBook(1, 5)).toBe('Request is being processed');
+    expect(db.bookRequestLog.length).toBe(length + 1);
+  })
 });
