@@ -1,5 +1,5 @@
 var db = require('../../helper/db');
-var inherit = require('../extend');
+var inherit = require('../../helper/extend');
 var User = require('../users/users');
 
 function Student(name, level) {

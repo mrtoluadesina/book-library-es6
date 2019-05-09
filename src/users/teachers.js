@@ -1,6 +1,6 @@
 var db = require('../../helper/db');
-var inherit = require('../extend');
-var User = require('../users/users');
+var User = require('./users');
+var inherit = require('../../helper/extend');
 
 
 function Teacher(name) {
