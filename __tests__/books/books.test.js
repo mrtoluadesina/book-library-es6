@@ -16,4 +16,9 @@ describe('Book Constructor Tests', function() {
     var got = new Book('A Feast of Crows', 3);
     expect(got.edit('A Feast of Crows', 1)).toEqual(expect.objectContaining({quantity: 1}));
   });
+  
+  it('checks that a book is deleted', function() {
+    var got = new Book('A Feast of Crows', 3);
+    expect(got.delete()).toBe('Book Deleted');
+  });
 });
