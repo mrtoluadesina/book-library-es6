@@ -8,4 +8,11 @@ function Book(name, quantity) {
   db.books.push(this);
 }
 
+Book.prototype = {
+  constructor: Book,
+  create: function() {
+    return new Book;
+  }
+}
+
 module.exports = Book;
