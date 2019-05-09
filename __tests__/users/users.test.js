@@ -2,6 +2,7 @@ var db = require('../../helper/db');
 var User = require('../../src/users/users');
 var Student = require('../../src/users/students');
 var Teacher = require('../../src/users/teachers');
+var Librarian = require('../../src/users/librarian');
 
 describe('User Constructor Tests', function() {
   it('checks the id autoincrement if it works properly', function() {
@@ -55,5 +56,12 @@ describe('Teacher Constructor Tests', function() {
     var expected = {'name': expect.stringMatching(/^[a-z]+$/i)};
     expect(sansa.readUser()).toEqual(expect.objectContaining({'name': 'stark'}));
     expect(sansa.readUser()).toEqual(expect.objectContaining(expected));
+  });
+});
+
+describe('Librarian Constructor Tests', function() {
+  it('checks for an instance of the librarian class', function() {
+    var admin = new Librarian('Samwell Tarly');
+    expect(admin instanceof Librarian).toBeTruthy();
   });
 });
