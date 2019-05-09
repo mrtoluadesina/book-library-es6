@@ -1,4 +1,5 @@
 var db = require('../../helper/db');
+var Book = require('../../src/books/books');
 var User = require('../../src/users/users');
 var Student = require('../../src/users/students');
 var Teacher = require('../../src/users/teachers');
@@ -61,7 +62,15 @@ describe('Teacher Constructor Tests', function() {
 
 describe('Librarian Constructor Tests', function() {
   it('checks for an instance of the librarian class', function() {
-    var admin = new Librarian('Samwell Tarly');
+    var admin = new Librarian('Samwell');
     expect(admin instanceof Librarian).toBeTruthy();
+  });
+  
+  it('checks that a librarian can add a book', function() {
+    var admin = new Librarian('Tarly');
+    var length = db.books.length;
+    expect(admin.addBook('A Dance with Dragons', '3')).toBe('Book Created');
+    expect(db.books.length).toEqual(length + 1)
+    console.log(db.books)
   });
 });
