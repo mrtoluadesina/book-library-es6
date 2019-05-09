@@ -23,7 +23,7 @@ describe('User Constructor Tests', function() {
 
   it('checks if the users details gets updated', function() {
     var arya = new User('stark', 'stark@winterfell.com');
-    expect(arya.update('tyron')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^tyron$/)}));
+    expect(arya.update('tyron', 'stark@winterfell.com', 'senior student')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^tyron$/)}));
   });
 
   it('checks if the user gets deleted', function() {
