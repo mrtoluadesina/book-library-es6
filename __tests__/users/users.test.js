@@ -1,4 +1,4 @@
-var db = require('../../db');
+var db = require('../../helper/db');
 var User = require('../../src/users/users');
 var Teacher = require('../../src/users/teachers');
 
