@@ -32,10 +32,11 @@ Book.prototype = {
       if (db.books[index].name === name && db.books[index].isActive === true) return db.books[index];
     } return 'Book not found!'
   },
-  bookRequest: function(id, duration, requester) {
+  bookRequest: function(id, duration, userId) {
     var bookName = Book.prototype.read(id).name;
+    var requestStatus = 'processing';
     db.bookRequestLog.push({
-      bookName, duration, requester
+      bookName, duration, userId, requestStatus
     });
     return 'Request is being processed';
   }

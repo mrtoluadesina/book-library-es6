@@ -39,8 +39,8 @@ User.prototype = {
     return Book.prototype.read(id);
   },
   requestBook: function(id, duration) {
-    var requester = this.userType;
-    return Book.prototype.bookRequest(id, duration, requester);
+    var userId = this.id;
+    return Book.prototype.bookRequest(id, duration, userId);
   }
 }
 
