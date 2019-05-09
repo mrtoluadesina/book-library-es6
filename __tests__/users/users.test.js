@@ -71,4 +71,11 @@ describe('Library Method Tests', function() {
     expect(edaard.bookLookUp('A Dance with Dragons')).toHaveProperty('quantity', '3');
     expect(edaard.bookLookUp()).toMatch('Book not ');
   });
+  
+  it('checks that a book can be read by its ID', function() {
+    console.log(db.books);
+    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
+    expect(admin.getBookById()).toBe('No Such Book');
+    expect(admin.getBookById(1)).toEqual(expect.objectContaining({name: 'A Dance with Dragons'}));
+  })
 });
