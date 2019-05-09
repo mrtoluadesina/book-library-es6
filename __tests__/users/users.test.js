@@ -33,7 +33,7 @@ describe('User Constructor Tests', function() {
 
   it('checks that a user is searched and found', function() {
     var ser = new User('brienne', 'serb@winterfell.com', 'senior student');
-    expect(ser.search('brienne')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^brienne$/), 'userType': 'teacher'}));
+    expect(ser.search('brienne')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^brienne$/), 'userType': 'senior student'}));
   });
 });
 
@@ -57,7 +57,7 @@ describe('Librarian Constructor Tests', function() {
   });
   
   it('checks that a librarian can add a book', function() {
-    var admin = new Librarian('Tarly');
+    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
     var length = db.books.length;
     expect(admin.addBook('A Dance with Dragons', '3')).toBe('Book Created');
     expect(db.books.length).toEqual(length + 1);
@@ -66,7 +66,7 @@ describe('Librarian Constructor Tests', function() {
 
 describe('Library Method Tests', function() {
   it('checks that a book searched by a user is found if Active', function() {
-    var edaard = new User('Edaard');
+    var edaard = new User('Edaard', 'edaard@winterfell.com', 'teacher');
     expect(edaard.bookLookUp('A Dance with Dragons')).toHaveProperty('isActive', true);
     expect(edaard.bookLookUp('A Dance with Dragons')).toHaveProperty('quantity', '3');
     expect(edaard.bookLookUp()).toMatch('Book not ');
