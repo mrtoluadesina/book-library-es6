@@ -1,11 +1,11 @@
 var db = require('../../helper/db');
-
+var id = 1;
 function Book(name, quantity) {
   this.name = name;
   this.quantity = quantity;
   this.isActive = true;
-  this.id = db.books.length > 0 ? db.books[db.books.length - 1].id + 1 : 1;
-  db.books.push(this);
+  this.id = id;
+  id++;
 }
 
 Book.prototype = {
