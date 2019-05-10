@@ -32,13 +32,26 @@ Book.prototype = {
       if (db.books[index].name === name && db.books[index].isActive === true) return db.books[index];
     } return 'Book not found!'
   },
-  bookRequest: function(id, duration, userId) {
+  bookRequest: function(id, duration, userId, userName, userPriority) {
     var bookName = Book.prototype.read(id).name;
+    var time = String(new Date()).replace(/\sG.+/, '');
     var requestStatus = 'processing';
     db.bookRequestLog.push({
-      bookName, duration, userId, requestStatus
-    });
-    return 'Request is being processed';
+      bookName, time, duration, userId, userName, userPriority, requestStatus
+    }); 
+    return 'Your order is processing!';
+  },
+  processRequest: function(){
+    var availableCopies = Book.prototype.read(id).quantity;
+    for (var index = 0; index < db.bookRequestLog.length; index++) {
+      if (db.bookRequestLog[index].availableCopies > 0) {
+        db.bookRequestLog[index].availableCopies -= 1;
+        db.bookRequestLog[index].requestStatus = 'processed';
+        return 'Thanks for getting a book from us, we are expecting it back in ' + db.bookRequestLog[index].duration + ' days';
+      } else {
+        return 'Book Taken'
+      } 
+    }
   }
 }
 
