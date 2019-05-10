@@ -1,5 +1,4 @@
 var db = require('../../helper/db');
-var Book = require('../../src/books/books');
 var User = require('../../src/users/users');
 var Librarian = require('../../src/users/librarian');
 
@@ -36,10 +35,6 @@ describe('User Constructor Tests', function() {
     expect(ser.search('brienne')).toEqual(expect.objectContaining({'name': expect.stringMatching(/^brienne$/), 'userType': 'senior student'}));
   });
 });
-
-describe('Student Role Tests', function() {
-  
-})
 
 describe('Teacher Role Tests', function() {
   it('checks if a teacher can read his details', function() {
@@ -92,13 +87,11 @@ describe('Library Method Tests', function() {
     expect(edaard.requestBook(1, 5)).toMatch('Your or');
     expect(uche.requestBook(2, 5)).toMatch('Your or');
     expect(rukky.requestBook(1, 5)).toBe('Your order is processing!');
-    console.log(db.bookRequestLog);
   });
 
   it('checks that the approve method returns thanks when book is available and book taken when it is not available', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
     expect(admin.approveRequest(1)).toMatch('Book ');
     expect(admin.approveRequest(2)).toMatch('Thanks for ');
-    console.log(db.books);
   });
 });
