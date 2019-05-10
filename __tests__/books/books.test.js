@@ -1,4 +1,3 @@
-var db = require('../../helper/db');
 var Book = require('../../src/books/books');
 
 describe('Book Constructor Tests', function() {
