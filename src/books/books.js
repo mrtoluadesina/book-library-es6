@@ -32,27 +32,33 @@ Book.prototype = {
       if (db.books[index].name === name && db.books[index].isActive === true) return db.books[index];
     } return 'Book not found!'
   },
-  bookRequest: function(id, duration, userId, userName, userPriority) {
-    var bookName = Book.prototype.read(id).name;
+  bookRequest: function(bookId, duration, userId, userName, userPriority) {
+    var bookName = Book.prototype.read(bookId).name;
     var time = String(new Date()).replace(/\sG.+/, '');
     var requestStatus = 'processing';
     db.bookRequestLog.push({
-      bookName, time, duration, userId, userName, userPriority, requestStatus
+      bookId, bookName, time, duration, userId, userName, userPriority, requestStatus
     }); 
+    db.bookRequestLog.sort(function(a, b) {
+      return b.userPriority - a.userPriority;
+    });
     return 'Your order is processing!';
   },
-  processRequest: function(){
-    var availableCopies = Book.prototype.read(id).quantity;
+  processRequest: function(id) {
     for (var index = 0; index < db.bookRequestLog.length; index++) {
-      if (db.bookRequestLog[index].availableCopies > 0) {
-        db.bookRequestLog[index].availableCopies -= 1;
-        db.bookRequestLog[index].requestStatus = 'processed';
-        return 'Thanks for getting a book from us, we are expecting it back in ' + db.bookRequestLog[index].duration + ' days';
-      } else {
-        return 'Book Taken'
-      } 
+      if ((db.bookRequestLog.indexOf(db.bookRequestLog[index]) + 1) === id) {
+        var availableCopies = Book.prototype.read(db.bookRequestLog[index].bookId).quantity;
+        if (availableCopies > 0) {
+          var borrowedBook = Book.prototype.search(db.bookRequestLog[index].bookName)
+          availableCopies -= 1;
+          Book.prototype.edit(borrowedBook, availableCopies);
+          db.bookRequestLog[index].requestStatus = 'processed';
+          return 'Thanks for getting a book from us, we are expecting it back in ' + db.bookRequestLog[index].duration + ' days';
+        } else {
+          return 'Book Taken'
+        } 
+      }
     }
   }
 }
-
 module.exports = Book;
