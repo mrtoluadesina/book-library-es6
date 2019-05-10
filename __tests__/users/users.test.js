@@ -63,6 +63,8 @@ describe('Librarian Constructor Tests', function() {
     expect(db.books.length).toEqual(length + 1);
     expect(admin.addBook('A Storm of Swords', '2')).toBe('Book Created');
     expect(db.books.length).toEqual(length + 2);
+    expect(admin.addBook('A Clash of Kings', '0')).toBe('Book Created');
+    expect(db.books.length).toEqual(length + 3);
   });
 });
 
@@ -78,17 +80,25 @@ describe('Library Method Tests', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
     expect(admin.getBookById()).toBe('No Such Book');
     expect(admin.getBookById(1)).toEqual(expect.objectContaining({name: 'A Dance with Dragons'}));
-  })
+  });
   
   it('checks that a book is added to the book request table when requested', function() {
     var bobby = new User('Bobby', 'bobby@winterfell.com', 'junior student');
     var edaard = new User('Edaard', 'edaard@winterfell.com', 'teacher');
     var uche = new User('Uche', 'uche@winterfell.com', 'junior student');
     var rukky = new User('Rukky', 'edaard@winterfell.com', 'teacher');
+    expect(rukky.requestBook(3, 2)).toBe('Your order is processing!');
     expect(bobby.requestBook(2, 5)).toMatch('Your or');
     expect(edaard.requestBook(1, 5)).toMatch('Your or');
     expect(uche.requestBook(2, 5)).toMatch('Your or');
     expect(rukky.requestBook(1, 5)).toBe('Your order is processing!');
     console.log(db.bookRequestLog);
-  })
+  });
+
+  it('checks that the approve method returns thanks when book is available and book taken when it is not available', function() {
+    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
+    expect(admin.approveRequest(1)).toMatch('Book ');
+    expect(admin.approveRequest(2)).toMatch('Thanks for ');
+    console.log(db.books);
+  });
 });
