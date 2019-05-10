@@ -59,8 +59,10 @@ describe('Librarian Constructor Tests', function() {
   it('checks that a librarian can add a book', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
     var length = db.books.length;
-    expect(admin.addBook('A Dance with Dragons', '3')).toBe('Book Created');
+    expect(admin.addBook('A Dance with Dragons', '1')).toBe('Book Created');
     expect(db.books.length).toEqual(length + 1);
+    expect(admin.addBook('A Storm of Swords', '2')).toBe('Book Created');
+    expect(db.books.length).toEqual(length + 2);
   });
 });
 
@@ -68,21 +70,25 @@ describe('Library Method Tests', function() {
   it('checks that a book searched by a user is found if Active', function() {
     var edaard = new User('Edaard', 'edaard@winterfell.com', 'teacher');
     expect(edaard.bookLookUp('A Dance with Dragons')).toHaveProperty('isActive', true);
-    expect(edaard.bookLookUp('A Dance with Dragons')).toHaveProperty('quantity', '3');
+    expect(edaard.bookLookUp('A Dance with Dragons')).toHaveProperty('quantity', '1');
     expect(edaard.bookLookUp()).toMatch('Book not ');
   });
   
   it('checks that a book can be read by its ID', function() {
-    console.log(db.books);
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
     expect(admin.getBookById()).toBe('No Such Book');
     expect(admin.getBookById(1)).toEqual(expect.objectContaining({name: 'A Dance with Dragons'}));
   })
   
   it('checks that a book is added to the book request table when requested', function() {
+    var bobby = new User('Bobby', 'bobby@winterfell.com', 'junior student');
     var edaard = new User('Edaard', 'edaard@winterfell.com', 'teacher');
-    var length = db.bookRequestLog.length
-    expect(edaard.requestBook(1, 5)).toBe('Request is being processed');
-    expect(db.bookRequestLog.length).toBe(length + 1);
+    var uche = new User('Uche', 'uche@winterfell.com', 'junior student');
+    var rukky = new User('Rukky', 'edaard@winterfell.com', 'teacher');
+    expect(bobby.requestBook(2, 5)).toMatch('Your or');
+    expect(edaard.requestBook(1, 5)).toMatch('Your or');
+    expect(uche.requestBook(2, 5)).toMatch('Your or');
+    expect(rukky.requestBook(1, 5)).toBe('Your order is processing!');
+    console.log(db.bookRequestLog);
   })
 });
