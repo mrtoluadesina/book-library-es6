@@ -1,4 +1,4 @@
-var db = require('../../helper/db');
+var db = require('../../database/db');
 var User = require('./users');
 var Book = require('../books/books');
 var inherit = require('../../helper/extend');

@@ -1,4 +1,4 @@
-var db = require('../../helper/db');
+var db = require('../../database/db');
 var Book = require('../books/books');
 
 function User(name, email, userType = 'junior student', userPriority = 1) {

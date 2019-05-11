@@ -1,4 +1,4 @@
-var db = require('../../helper/db');
+var db = require('../../database/db');
 var User = require('../../src/users/users');
 var Librarian = require('../../src/users/librarian');
 
@@ -92,6 +92,6 @@ describe('Library Method Tests', function() {
   it('checks that the approve method returns thanks when book is available and book taken when it is not available', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
     expect(admin.approveRequest(1)).toMatch('Book ');
-    expect(admin.approveRequest(2)).toMatch('Thanks for ');
+    expect(admin.approveRequest(2)).toMatch('Your order ');
   });
 });
