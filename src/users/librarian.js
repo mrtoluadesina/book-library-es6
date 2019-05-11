@@ -17,6 +17,10 @@ Librarian.prototype.addBook = function(name, quantity) {
   return 'Book Created';
 }
 
+Librarian.prototype.updateBook = function(id, name, quantity) {
+  return Book.prototype.edit(id, name, quantity)
+}
+
 Librarian.prototype.approveRequest = function(id) {
   return Book.prototype.processRequest(id)
 }
