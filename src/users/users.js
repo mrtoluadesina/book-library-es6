@@ -40,7 +40,7 @@ User.prototype = {
       }
     }
   },
-  //fucntion to search for a book - simple calls the actual function from the Book prototype
+  // function to search for a book - simple calls the actual function from the Book prototype
   bookLookUp: function(name) {
     return Book.prototype.search(name);
   },
