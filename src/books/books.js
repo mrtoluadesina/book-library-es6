@@ -52,6 +52,10 @@ Book.prototype = {
   processRequest: function(id) {
     for (var index = 0; index < db.bookRequestLog.length; index++) {
       // since there was no auto incrementing id for book requests, the indexof each object is used to find the request.
+      // we first check to know if the request has been completed previously
+      if ((db.bookRequestLog.indexOf(db.bookRequestLog[index]) + 1) === id && db.bookRequestLog[index].requestStatus === 'completed') {
+        return 'Order completed previously';
+      }
       // we also check to make sure it is still of a processing status
       if ((db.bookRequestLog.indexOf(db.bookRequestLog[index]) + 1) === id && db.bookRequestLog[index].requestStatus === 'processing') {
         var availableCopies = Book.prototype.read(db.bookRequestLog[index].bookId).quantity;
@@ -65,9 +69,6 @@ Book.prototype = {
           db.bookRequestLog[index].requestStatus = 'completed'; // change status of request to completed
           return 'Book Taken'
         } 
-      }
-      if ((db.bookRequestLog.indexOf(db.bookRequestLog[index]) + 1) === id && db.bookRequestLog[index].requestStatus === 'completed') {
-        return 'Order completed previously';
       }
     } 
   }
