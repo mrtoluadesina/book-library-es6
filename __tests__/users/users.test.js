@@ -61,6 +61,12 @@ describe('Librarian Constructor Tests', function() {
     expect(admin.addBook('A Clash of Kings', '0')).toBe('Book Created');
     expect(db.books.length).toEqual(length + 3);
   });
+  
+  it('checks that a librarian is able to update a book', function() {
+    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
+    expect(admin.addBook('A Clash of Thrones', '0')).toBe('Book Created');
+    expect(admin.updateBook(4, 'A Clash of Thrones', '4')).toBe('Book Updated');
+  });
 });
 
 describe('Library Method Tests', function() {
@@ -92,16 +98,17 @@ describe('Library Method Tests', function() {
   it('checks that the approve method returns your order is completed when book is available', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
     expect(admin.approveRequest(2)).toMatch('Your order ');
+    expect(admin.approveRequest(2)).toMatch('Order com');
   });
   
   it('checks that the approve method returns book taken when available books is zero', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
     expect(admin.approveRequest(1)).toMatch('Book Taken');
   });
-
+  
   it('checks that the process request method first checks to know if the status of a request is completed', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
-    expect(admin.approveRequest(1)).toMatch('Order compl')
+    expect(admin.approveRequest(1)).toMatch('Order compl');
   })
   
   it('checks that the status of a request changes after the request is approved', function() {
@@ -109,5 +116,13 @@ describe('Library Method Tests', function() {
     var request = db.bookRequestLog[3];
     expect(admin.approveRequest(4)).toMatch('Your ');
     expect(request).toEqual(expect.objectContaining({requestStatus: 'completed'}));
+  });
+
+  it('checks that the quantity of a book is reduced by one after each approval', function() {
+    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
+    var request = db.bookRequestLog[4].bookId;
+    var requestedBook = db.books[request - 1];
+    expect(admin.approveRequest(5)).toMatch('Your ');
+    expect(requestedBook).toEqual(expect.objectContaining({quantity: 0}));
   });
 });
