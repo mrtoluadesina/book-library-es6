@@ -97,12 +97,17 @@ describe('Library Method Tests', function() {
   it('checks that the approve method returns book taken when available books is zero', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
     expect(admin.approveRequest(1)).toMatch('Book Taken');
+  });
+
+  it('checks that the process request method first checks to know if the status of a request is completed', function() {
+    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
+    expect(admin.approveRequest(1)).toMatch('Order compl')
   })
   
   it('checks that the status of a request changes after the request is approved', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
     console.log(db.bookRequestLog);
-    expect(admin.approveRequest(3)).toMatch('Your ');
+    expect(admin.approveRequest(4)).toMatch('Your ');
     console.log(db.bookRequestLog);
   });
 });
