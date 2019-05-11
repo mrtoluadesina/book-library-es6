@@ -106,8 +106,8 @@ describe('Library Method Tests', function() {
   
   it('checks that the status of a request changes after the request is approved', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
-    console.log(db.bookRequestLog);
+    var request = db.bookRequestLog[3];
     expect(admin.approveRequest(4)).toMatch('Your ');
-    console.log(db.bookRequestLog);
+    expect(request).toEqual(expect.objectContaining({requestStatus: 'completed'}));
   });
 });
