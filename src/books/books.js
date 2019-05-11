@@ -51,8 +51,9 @@ Book.prototype = {
   // function to process request in the request log table
   processRequest: function(id) {
     for (var index = 0; index < db.bookRequestLog.length; index++) {
-      // since there was no auto incrementing id for book requests, the indexof each object is used to find it.
-      if ((db.bookRequestLog.indexOf(db.bookRequestLog[index]) + 1) === id) {
+      // since there was no auto incrementing id for book requests, the indexof each object is used to find the request.
+      // we also check to make sure it is still of a processing status
+      if ((db.bookRequestLog.indexOf(db.bookRequestLog[index]) + 1) === id && db.bookRequestLog[index].requestStatus === 'processing') {
         var availableCopies = Book.prototype.read(db.bookRequestLog[index].bookId).quantity;
         if (availableCopies > 0) {
           var borrowedBook = Book.prototype.search(db.bookRequestLog[index].bookName)
@@ -61,10 +62,14 @@ Book.prototype = {
           db.bookRequestLog[index].requestStatus = 'completed'; // change status of request to completed
           return 'Your order is now completed';
         } else {
+          db.bookRequestLog[index].requestStatus = 'completed'; // change status of request to completed
           return 'Book Taken'
         } 
       }
-    }
+      if ((db.bookRequestLog.indexOf(db.bookRequestLog[index]) + 1) === id && db.bookRequestLog[index].requestStatus === 'completed') {
+        return 'Order completed previously';
+      }
+    } 
   }
 }
 module.exports = Book;
