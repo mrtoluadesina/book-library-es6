@@ -1,4 +1,4 @@
-var db = require('../../helper/db');
+var db = require('../../database/db');
 var id = 1;
 
 function Book(name, quantity) {
@@ -42,22 +42,24 @@ Book.prototype = {
     db.bookRequestLog.push({
       bookId, bookName, time, duration, userId, userName, userPriority, requestStatus
     }); 
-
+    // Sort the request table to make sure it handles the higher priority first
     db.bookRequestLog.sort(function(a, b) {
       return b.userPriority - a.userPriority;
     });
     return 'Your order is processing!';
   },
+  // function to process request in the request log table
   processRequest: function(id) {
     for (var index = 0; index < db.bookRequestLog.length; index++) {
+      // since there was no auto incrementing id for book requests, the indexof each object is used to find it.
       if ((db.bookRequestLog.indexOf(db.bookRequestLog[index]) + 1) === id) {
         var availableCopies = Book.prototype.read(db.bookRequestLog[index].bookId).quantity;
         if (availableCopies > 0) {
           var borrowedBook = Book.prototype.search(db.bookRequestLog[index].bookName)
-          availableCopies -= 1;
-          Book.prototype.edit(borrowedBook, availableCopies);
-          db.bookRequestLog[index].requestStatus = 'processed';
-          return 'Thanks for getting a book from us, we are expecting it back in ' + db.bookRequestLog[index].duration + ' days';
+          availableCopies -= 1; // decrement the number of copies available by 1
+          Book.prototype.edit(borrowedBook, availableCopies); // call the edit method to update the details of the book with new quantity
+          db.bookRequestLog[index].requestStatus = 'completed'; // change status of request to completed
+          return 'Your order is now completed';
         } else {
           return 'Book Taken'
         } 
