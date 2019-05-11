@@ -89,9 +89,20 @@ describe('Library Method Tests', function() {
     expect(rukky.requestBook(1, 5)).toBe('Your order is processing!');
   });
 
-  it('checks that the approve method returns thanks when book is available and book taken when it is not available', function() {
+  it('checks that the approve method returns your order is completed when book is available', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
-    expect(admin.approveRequest(1)).toMatch('Book ');
     expect(admin.approveRequest(2)).toMatch('Your order ');
+  });
+  
+  it('checks that the approve method returns book taken when available books is zero', function() {
+    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
+    expect(admin.approveRequest(1)).toMatch('Book Taken');
+  })
+  
+  it('checks that the status of a request changes after the request is approved', function() {
+    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
+    console.log(db.bookRequestLog);
+    expect(admin.approveRequest(3)).toMatch('Your ');
+    console.log(db.bookRequestLog);
   });
 });
