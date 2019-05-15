@@ -1,15 +1,16 @@
 var db = require('../../database/db');
 var Book = require('../books/books');
 
-function User(name, email, userType = 'junior student', userPriority = 1) {
+function User(name, email, userType) {
   this.name = name;
   this.email = email;
-  this.userType = userType;
+  this.userType = userType || 'junior student';
   if (userType === 'teacher') this.userPriority = 3;
   if (userType === 'senior student') this.userPriority = 2;
-  if (userType === 'junior student') this.userPriority = userPriority;
+  if (userType === 'junior student') this.userPriority = 1;
   this.isActive = true;
-  this.id = db.users.length > 0 ? db.users[db.users.length - 1].id + 1 : 1; // generates the UserId
+  // generates the UserId
+  this.id = db.users.length > 0 ? db.users[db.users.length - 1].id + 1 : 1; 
   db.users.push(this);
 }
 
