@@ -19,7 +19,7 @@ Book.prototype = {
   read: function(id) {
     for (var index = 0; index < db.books.length; index++) {
       // checks if the id of the current item is same as the id from parameter
-      if(db.books[index].id === id) return db.books[index];  
+      if (db.books[index].id === id) return db.books[index];  
     } return 'No Such Book';
   },
 
@@ -41,7 +41,7 @@ Book.prototype = {
       if (db.books[index].name === name && db.books[index].isActive === true) return db.books[index]; 
     } return 'Book not found!'
   },
-  
+
   // function for requesting a book
   bookRequest: function(bookId, duration, userId, userName, userPriority) {
     var bookName = Book.prototype.read(bookId).name;
