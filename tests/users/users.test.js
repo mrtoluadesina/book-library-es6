@@ -95,34 +95,17 @@ describe('Library Method Tests', function() {
     expect(rukky.requestBook(1, 5)).toBe('Your order is processing!');
   });
 
-  it('checks that the approve method returns your order is completed when book is available', function() {
-    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
-    expect(admin.approveRequest(2)).toMatch('Your order ');
-    expect(admin.approveRequest(2)).toMatch('Order com');
-  });
-  
-  it('checks that the approve method returns book taken when available books is zero', function() {
-    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
-    expect(admin.approveRequest(1)).toMatch('Book Taken');
-  });
-  
-  it('checks that the process request method first checks to know if the status of a request is completed', function() {
-    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
-    expect(admin.approveRequest(1)).toMatch('Order compl');
+  it('checks that all books in the queue is processed', function() {
+    var admin = new Librarian('Samwell', 'samwell@housetargeryan.com');
+    expect(admin.approveRequest()).toMatch('Batch Processed');
   })
-  
-  it('checks that the status of a request changes after the request is approved', function() {
-    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
-    var request = db.bookRequestLog[3];
-    expect(admin.approveRequest(4)).toMatch('Your ');
-    expect(request).toEqual(expect.objectContaining({requestStatus: 'completed'}));
-  });
 
-  it('checks that the quantity of a book is reduced by one after each approval', function() {
-    var admin = new Librarian('Tarly', 'samwell@winterfell.com');
-    var request = db.bookRequestLog[4].bookId;
-    var requestedBook = db.books[request - 1];
-    expect(admin.approveRequest(5)).toMatch('Your ');
-    expect(requestedBook).toEqual(expect.objectContaining({quantity: 0}));
+  it('checks that the status of a book request becomes completed when approved and book is available', function() {
+    var admin = new Librarian('Tarly', 'tarly@baratheon.com');
+    var hound = new User('hound', 'hound@winterfell.com', 'senior student');
+    expect(hound.requestBook(4, 5)).toMatch('Your order is processing');
+    var lastEntryInDb = db.bookRequestLog[db.bookRequestLog.length - 1];
+    expect(admin.approveRequest()).toMatch('Batch Process');
+    expect(lastEntryInDb.requestStatus).toBe('completed');
   });
 });
