@@ -12,6 +12,7 @@ function Book(name, quantity) {
 
 Book.prototype = {
   constructor: Book,
+
   create: function () {
     return new Book;
   },
@@ -51,23 +52,23 @@ Book.prototype = {
     db.bookRequestLog.push({
       bookId, bookName, time, duration, userId, userName, userPriority, requestStatus
     }); 
-    // Sort the request table to make sure it handles the higher priority first
-    db.bookRequestLog.sort(function(a, b) {
-      return b.userPriority - a.userPriority;
-    });
+    // // Sort the request table to make sure it handles the higher priority first
+    // db.bookRequestLog.sort(function(a, b) {
+    //   return b.userPriority - a.userPriority;
+    // });
     return 'Your order is processing!';
   },
 
   // function to process request in the request log table
-  processRequest: function (id) {
+  processRequest: function () {
+    // Sort the request table to make sure it handles the higher priority first
+    db.bookRequestLog.sort(function(a, b) {
+      return b.userPriority - a.userPriority;
+    });
+
     for (var index = 0; index < db.bookRequestLog.length; index++) {
-      // since there was no auto incrementing id for book requests, the index counter is used to find the request.
-      // we first check to know if the request has been completed previously
-      if ((index + 1) === id && db.bookRequestLog[index].requestStatus === 'completed') {
-        return 'Order completed previously';
-      }
-      // we also check to make sure it is still of a processing status
-      if ((index + 1) === id && db.bookRequestLog[index].requestStatus === 'processing') {
+      // we first check to make sure it is still of a processing status
+      if (db.bookRequestLog[index].requestStatus === 'processing') {
         var availableCopies = Number(Book.prototype.read(db.bookRequestLog[index].bookId).quantity);
         if (availableCopies > 0) {
           var borrowedBook = Book.prototype.read(db.bookRequestLog[index].bookId).name;
@@ -77,14 +78,15 @@ Book.prototype = {
           Book.prototype.edit(db.bookRequestLog[index].bookId, borrowedBook, availableCopies); 
           // change status of request to completed
           db.bookRequestLog[index].requestStatus = 'completed'; 
-          return 'Your order is now completed';
+          // return 'Your order is now completed';
         } else {
           // change status of request to completed
-          db.bookRequestLog[index].requestStatus = 'completed'; 
-          return 'Book Taken'
+          db.bookRequestLog[index].requestStatus = 'Book Taken'; 
+          // return 'Book Taken'
         } 
-      }
+      } 
     } 
+    return 'Batch Processed'
   }
 }
 module.exports = Book;
