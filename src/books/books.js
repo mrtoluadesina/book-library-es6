@@ -6,7 +6,8 @@ function Book(name, quantity) {
   this.quantity = quantity;
   this.isActive = true;
   this.id = thisBookId;
-  thisBookId++; // increments id so when a new Book is created id is  + 1
+  // increments id so when a new Book is created id is  + 1
+  thisBookId++;
 }
 
 Book.prototype = {
@@ -16,7 +17,8 @@ Book.prototype = {
   },
   read: function(id) {
     for (var index = 0; index < db.books.length; index++) {
-      if(db.books[index].id === id) return db.books[index];  // checks if the id of the current item is same as the id from parameter
+      // checks if the id of the current item is same as the id from parameter
+      if(db.books[index].id === id) return db.books[index];  
     } return 'No Such Book';
   },
   edit: function(id, name, quantity) {
@@ -31,7 +33,8 @@ Book.prototype = {
   },
   search: function(name) {
     for (var index = 0; index < db.books.length; index++) {
-      if (db.books[index].name === name && db.books[index].isActive === true) return db.books[index]; // checks if the name of the current item is same as the name from the parameter
+      // checks if the name of the current item is same as the name from the parameter
+      if (db.books[index].name === name && db.books[index].isActive === true) return db.books[index]; 
     } return 'Book not found!'
   },
   // function for requesting a book
@@ -62,12 +65,16 @@ Book.prototype = {
         var availableCopies = Number(Book.prototype.read(db.bookRequestLog[index].bookId).quantity);
         if (availableCopies > 0) {
           var borrowedBook = Book.prototype.read(db.bookRequestLog[index].bookId).name;
-          availableCopies -= 1; // decrement the number of copies available by 1
-          Book.prototype.edit(db.bookRequestLog[index].bookId, borrowedBook, availableCopies); // call the edit method to update the details of the book with new quantity
-          db.bookRequestLog[index].requestStatus = 'completed'; // change status of request to completed
+          // decrement the number of copies available by 1
+          availableCopies -= 1; 
+          // call the edit method to update the details of the book with new quantity
+          Book.prototype.edit(db.bookRequestLog[index].bookId, borrowedBook, availableCopies); 
+          // change status of request to completed
+          db.bookRequestLog[index].requestStatus = 'completed'; 
           return 'Your order is now completed';
         } else {
-          db.bookRequestLog[index].requestStatus = 'completed'; // change status of request to completed
+          // change status of request to completed
+          db.bookRequestLog[index].requestStatus = 'completed'; 
           return 'Book Taken'
         } 
       }
