@@ -15,28 +15,33 @@ Book.prototype = {
   create: function() {
     return new Book;
   },
+
   read: function(id) {
     for (var index = 0; index < db.books.length; index++) {
       // checks if the id of the current item is same as the id from parameter
       if(db.books[index].id === id) return db.books[index];  
     } return 'No Such Book';
   },
+
   edit: function(id, name, quantity) {
     var book = Book.prototype.read(id);
     book.name = name;
     book.quantity = quantity;
     return 'Book Updated';
   },
+
   delete: function() {
     this.isActive = false;
     return 'Book Deleted';
   },
+
   search: function(name) {
     for (var index = 0; index < db.books.length; index++) {
       // checks if the name of the current item is same as the name from the parameter
       if (db.books[index].name === name && db.books[index].isActive === true) return db.books[index]; 
     } return 'Book not found!'
   },
+  
   // function for requesting a book
   bookRequest: function(bookId, duration, userId, userName, userPriority) {
     var bookName = Book.prototype.read(bookId).name;
@@ -52,6 +57,7 @@ Book.prototype = {
     });
     return 'Your order is processing!';
   },
+
   // function to process request in the request log table
   processRequest: function(id) {
     for (var index = 0; index < db.bookRequestLog.length; index++) {
