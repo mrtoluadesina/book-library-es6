@@ -3,11 +3,13 @@ var User = require('./users');
 var Book = require('../books/books');
 var inherit = require('../../helper/extend');
 
-function Librarian (name, email, userType = 'Admin') {
-  User.call(this, name, email, userType); // calls the constructor from the User Class to create the properties needed here
+function Librarian(name, email, userType = 'Admin') {
+  // calls the constructor from the User Class to create the properties needed here
+  User.call(this, name, email, userType); 
 }
 
-inherit (Librarian, User) // inherits from User Constructor so we can access the methods from User
+// inherits from User Constructor so we can access the methods from User
+inherit(Librarian, User) 
 
 Librarian.prototype.addBook = function (name, quantity) {
   var book = Book.prototype.create();
