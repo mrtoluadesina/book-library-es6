@@ -1,7 +1,7 @@
 var db = require('../../database/db');
 var thisBookId = 1;
 
-function Book (name, quantity) {
+function Book(name, quantity) {
   this.name = name;
   this.quantity = quantity;
   this.isActive = true;
