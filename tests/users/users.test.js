@@ -108,4 +108,18 @@ describe('Library Method Tests', function() {
     expect(admin.approveRequest()).toMatch('Batch Process');
     expect(lastEntryInDb.requestStatus).toBe('completed');
   });
+
+  it('checks that the status of a book is changed to book taken when available copies of a book is zero', function() {
+    var admin = new Librarian('Samwell', 'tarly@kinginthenorth.com');
+    var khaleesi = new User('Daenerys', 'Daenerys@motherofdragons.com');
+    expect(khaleesi.requestBook(3, 3)).toMatch('Your order is processing');
+    var lastEntryInDb = db.bookRequestLog[db.bookRequestLog.length - 1];
+    expect(admin.approveRequest()).toMatch('Batch Process');
+    expect(lastEntryInDb.requestStatus).toBe('Book Taken');
+  });
+  
+  it('checks that a book is returned when a user is done with it and that the quantity updates', function() {
+    var khaleesi = new User('Daenerys', 'Daenerys@motherofdragons.com');
+    expect(khaleesi.returnBook(3)).toMatch('Book Ret');
+  });
 });
