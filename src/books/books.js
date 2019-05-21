@@ -52,10 +52,6 @@ Book.prototype = {
     db.bookRequestLog.push({
       bookId, bookName, time, duration, userId, userName, userPriority, requestStatus
     }); 
-    // // Sort the request table to make sure it handles the higher priority first
-    // db.bookRequestLog.sort(function(a, b) {
-    //   return b.userPriority - a.userPriority;
-    // });
     return 'Your order is processing!';
   },
 
@@ -87,6 +83,14 @@ Book.prototype = {
       } 
     } 
     return 'Batch Processed'
+  },
+
+  returnABook: function(bookId) {
+    for (var index = 0; index < db.books.length; index++) {
+      if (db.books[index].id === bookId) {
+        db.books.quantity += 1;
+      }
+    } return 'Book Returned';
   }
 }
 module.exports = Book;
