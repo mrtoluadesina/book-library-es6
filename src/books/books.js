@@ -88,7 +88,7 @@ Book.prototype = {
   returnABook: function(bookId) {
     for (var index = 0; index < db.books.length; index++) {
       if (db.books[index].id === bookId) {
-        db.books.quantity += 1;
+        db.books[index].quantity += 1;
       }
     } return 'Book Returned';
   }
