@@ -58,14 +58,14 @@ describe('Librarian Constructor Tests', function() {
     expect(db.books.length).toEqual(length + 1);
     expect(admin.addBook('A Storm of Swords', '2')).toBe('Book Created');
     expect(db.books.length).toEqual(length + 2);
-    expect(admin.addBook('A Clash of Kings', '0')).toBe('Book Created');
+    expect(admin.addBook('A Clash of Kings', '1')).toBe('Book Created');
     expect(db.books.length).toEqual(length + 3);
   });
   
   it('checks that a librarian is able to update a book', function() {
     var admin = new Librarian('Tarly', 'samwell@winterfell.com');
-    expect(admin.addBook('A Clash of Thrones', '0')).toBe('Book Created');
-    expect(admin.updateBook(4, 'A Clash of Thrones', '4')).toBe('Book Updated');
+    expect(admin.addBook('A Clash of Thrones', 1)).toBe('Book Created');
+    expect(admin.updateBook(4, 'A Clash of Thrones', 4)).toBe('Book Updated');
   });
 });
 
@@ -120,6 +120,8 @@ describe('Library Method Tests', function() {
   
   it('checks that a book is returned when a user is done with it and that the quantity updates', function() {
     var khaleesi = new User('Daenerys', 'Daenerys@motherofdragons.com');
+    var quantityOfBook = db.books[2].quantity;
     expect(khaleesi.returnBook(3)).toMatch('Book Ret');
+    expect(db.books[2].quantity).toBe(quantityOfBook + 1);
   });
 });
