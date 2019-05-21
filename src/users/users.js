@@ -62,6 +62,10 @@ User.prototype = {
     var userName = this.name;
     var userPriority = this.userPriority;
     return Book.prototype.bookRequest(id, duration, userId, userName, userPriority);
+  },
+
+  returnBook: function(bookId) {
+    return Book.prototype.returnABook(bookId);
   }
 }
 
