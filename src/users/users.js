@@ -1,7 +1,5 @@
-// var db = require('../../database/db');
 import * as db from '../../database/db';
 import Book from '../books/books';
-// var Book = require('../books/books');
 
 class User {
   constructor (name, email, userType) {
