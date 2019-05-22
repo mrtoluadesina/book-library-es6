@@ -1,6 +1,6 @@
 import * as db from '../../database/db';
-let User = require('../../src/users/users');
-let Librarian = require('../../src/users/librarian');
+import User from '../../src/users/users';
+import Librarian from '../../src/users/librarian';
 
 describe('User Constructor Tests', () => {
   it('checks the id autoincrement if it works properly', () => {
