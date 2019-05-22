@@ -1,4 +1,4 @@
-import Book from '../../src/books/books';
+let Book = require('../../src/books/books');
 
 describe('Book Constructor Tests', () => {
   it('checks the id autoincrement if it works properly', () => {
