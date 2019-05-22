@@ -11,10 +11,12 @@ class Book {
     thisBookId++;
   }
 
+  // book method for creating a book
   create() {
     return new Book;
   }
 
+  // book method for reading a book by it's Id
   read(id) {
     for (let index = 0; index < db.books.length; index++) {
       // checks if the id of the current item is same as the id from parameter
@@ -22,6 +24,7 @@ class Book {
     } return 'No Such Book';
   }
 
+  // method to edit a book
   edit(id, name, quantity) {
     let book = Book.prototype.read(id);
     book.name = name;
@@ -29,11 +32,13 @@ class Book {
     return 'Book Updated';
   }
 
+  // method for deleting a book - more like changing it's active status
   delete() {
     this.isActive = false;
     return 'Book Deleted';
   }
 
+  // method for searching out a book from the database by it's name
   search(name) {
     for (var index = 0; index < db.books.length; index++) {
       // checks if the name of the current item is same as the name from the parameter
@@ -41,6 +46,7 @@ class Book {
     } return 'Book not found!'
   }
 
+  // method for requesting a book
   bookRequest(bookId, duration, userId, userName, userPriority) {
     let bookName = Book.prototype.read(bookId).name;
     let time = String(new Date()).replace(/\sG.+/, '');
@@ -52,6 +58,7 @@ class Book {
     return 'Your order is processing!';
   }
 
+  // method for approving a book request
   processRequest() {
     // Sort the request table to make sure it handles the higher priority first
     db.bookRequestLog.sort(function(a, b) {
@@ -81,6 +88,7 @@ class Book {
     return 'Batch Processed';
   }
 
+  // method for returning a book to the books db
   returnABook(bookId) {
     for (let index = 0; index < db.books.length; index++) {
       if (db.books[index].id === bookId) {

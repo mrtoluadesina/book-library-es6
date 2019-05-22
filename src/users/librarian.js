@@ -8,6 +8,7 @@ class Librarian extends User {
     this.userType = 'admin';
   }
 
+  // function to add book to the books database
   addBook(name, quantity) {
     let book = Book.prototype.create();
     book.name = name;
@@ -16,10 +17,12 @@ class Librarian extends User {
     return 'Book Created';
   }
 
+  // function to update a book in the books database
   updateBook(id, name, quantity) {
     return Book.prototype.edit(id, name, quantity);
   }
 
+  // function to approve a book request
   approveRequest() {
     return Book.prototype.processRequest();
   }
