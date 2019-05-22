@@ -1,4 +1,4 @@
-let db = require('../../database/db');
+import * as db from '../../database/db';
 let User = require('../../src/users/users');
 let Librarian = require('../../src/users/librarian');
 
