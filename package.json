@@ -4,7 +4,8 @@
   "description": "A book library system where students and teachers borrow books",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "build": "babel src -d lib"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,9 @@
   },
   "homepage": "https://github.com/mrtoluadesina/book-library#readme",
   "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "jest": "^24.8.0"
   }
 }
